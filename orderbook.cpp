@@ -25,3 +25,44 @@ void OrderBook::addMarketOrder(int id,Side side,int quantity){
 
     match(order);
 }
+
+void OrderBook::match(Order& order){
+    if(order.side == Side::BUY){
+        while(!asks.empty() && order.quantity > 0){
+            bool priceMatch = (order.type == OrderType::MARKET) || (asks.begin()->first <= order.price);
+            if(!priceMatch) break;
+
+            int tradeQty = std::min(order.quantity, asks.begin()->second.front().quantity);
+            
+            std::cout << "TRADE: " << tradeQty << " @ " << asks.begin()->first << "\n";
+            
+            order.quantity -= tradeQty;
+            asks.begin()->second.front().quantity -= tradeQty;
+
+            if(asks.begin()->second.front().quantity == 0){
+                asks.begin()->second.pop();
+                if(asks.begin()->second.empty())
+                    asks.erase(asks.begin());
+            }
+        }
+    }
+    else{
+        while(!bids.empty() && order.quantity > 0){
+            bool priceMatch = (order.type == OrderType::MARKET) || (bids.rbegin()->first >= order.price);
+            if(!priceMatch) break;
+
+            int tradeQty = std::min(order.quantity, bids.rbegin()->second.front().quantity);
+            
+            std::cout << "TRADE: " << tradeQty << " @ " << bids.rbegin()->first << "\n";
+            
+            order.quantity -= tradeQty;
+            bids.rbegin()->second.front().quantity -= tradeQty;
+
+            if(bids.rbegin()->second.front().quantity == 0){
+                bids.rbegin()->second.pop();
+                if(bids.rbegin()->second.empty())
+                    bids.erase(--bids.end());
+            }
+        }
+    }
+}
