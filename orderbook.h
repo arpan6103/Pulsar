@@ -3,11 +3,11 @@
 
 class OrderBook{
     private:
-    std::map<double,std::queue<Order>>bids;
-    std::map<double,std::queue<Order>>asks;
+    std::map<double,std::queue<Order*>>bids;
+    std::map<double,std::queue<Order*>>asks;
     std::unordered_map<int,Order*>cancel_order;
 
-    void match(Order& order);
+    void match(Order* order);
 
     public:
     void addLimitOrder(int id,Side side, int quantity,double price);
