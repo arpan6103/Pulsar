@@ -2,6 +2,8 @@
 #include <iostream>
 #include <map>
 #include <queue>
+#include <list>
 #include <unordered_map>
 #include <string>
 #include <chrono>
+#include <algorithm>
