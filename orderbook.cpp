@@ -114,6 +114,5 @@ void OrderBook::printBook(){
         }
         std::cout<<"\n";
     }
-    std::cout<<"\n";
     std::cout << "------------------------\n";
 }
