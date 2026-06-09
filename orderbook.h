@@ -19,4 +19,5 @@ class OrderBook{
     void addLimitOrder(int id,Side side, int quantity,double price);
     void addMarketOrder(int id,Side side,int quantity);
     void cancelOrder(int id);
+    void printBook();
 };

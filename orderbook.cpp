@@ -94,3 +94,26 @@ void OrderBook::cancelOrder(int id){
     }
     cancel_order.erase(found);
 }
+
+void OrderBook::printBook(){
+    std::cout << "------ ORDER BOOK ------\n";
+
+    std::cout << "ASKS:\n";
+    for(auto it=asks.begin();it!=asks.end();it++){
+        for(auto i:it->second){
+            std::cout<<"id: "<<i.id<<"  "<<i.price<<" -> "<<i.quantity<<"\n";
+        }
+        std::cout<<"\n";
+    }
+    std::cout<<"\n";
+
+    std::cout << "BIDS:\n";
+    for(auto it=bids.rbegin();it!=bids.rend();it++){
+        for(auto i:it->second){
+            std::cout<<"id: "<<i.id<<"  "<<i.price<<" -> "<<i.quantity<<"\n";
+        }
+        std::cout<<"\n";
+    }
+    std::cout<<"\n";
+    std::cout << "------------------------\n";
+}

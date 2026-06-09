@@ -14,6 +14,7 @@ int main(){
     book.addLimitOrder(6, Side::SELL, 10, 105.0);
     book.cancelOrder(6);
     book.addMarketOrder(7, Side::BUY, 5);
-
+    book.printBook();
+    
     return 0;
 }
