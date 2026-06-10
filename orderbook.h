@@ -20,4 +20,8 @@ class OrderBook{
     void addMarketOrder(int id,Side side,int quantity);
     void cancelOrder(int id);
     void printBook();
+    bool hasBid();
+    bool hasAsk();
+    double getBestBid();
+    double getBestAsk();
 };

@@ -116,3 +116,25 @@ void OrderBook::printBook(){
     }
     std::cout << "------------------------\n";
 }
+
+bool OrderBook::hasBid(){
+    return !bids.empty();
+}
+
+bool OrderBook::hasAsk(){
+    return !asks.empty();
+}
+
+double OrderBook::getBestBid(){
+    if(hasBid()){
+        return prev(bids.end())->first;
+    }
+    return -1;
+}
+
+double OrderBook::getBestAsk(){
+    if(hasAsk()){
+        return asks.begin()->first;
+    }
+    return -1;
+}
