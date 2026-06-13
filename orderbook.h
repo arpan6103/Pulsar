@@ -12,6 +12,7 @@ class OrderBook{
     std::map<double,std::list<Order>>bids;
     std::map<double,std::list<Order>>asks;
     std::unordered_map<int,OrderLocation>cancel_order;
+    bool verbose=true;
 
     void match(Order& order);
 
@@ -24,4 +25,5 @@ class OrderBook{
     bool hasAsk();
     double getBestBid();
     double getBestAsk();
+    void setVerbose(bool v){verbose=v;}
 };

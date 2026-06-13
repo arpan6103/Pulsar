@@ -1,1 +1,2 @@
 g++ *.cpp -o main && ./main < test.txt
+g++ -O2 benchmark.cpp orderbook.cpp -o bench && ./bench

@@ -35,7 +35,9 @@ void OrderBook::match(Order& order){
             else{
                 Order& resting=level->second.front();
                 int tradeQuantity=std::min(order.quantity,resting.quantity);
-                std::cout<<"TRADE: "<<tradeQuantity<<" @ "<<level->first<<" Buyer: "<<order.id<<" Seller: "<<resting.id<<"\n";
+                if(verbose){
+                    std::cout<<"TRADE: "<<tradeQuantity<<" @ "<<level->first<<" Buyer: "<<order.id<<" Seller: "<<resting.id<<"\n";
+                }
                 order.quantity-=tradeQuantity;
                 resting.quantity-=tradeQuantity;
                 if(resting.quantity==0){
@@ -57,7 +59,9 @@ void OrderBook::match(Order& order){
             else{
                 Order& resting=level->second.front();
                 int tradeQuantity=std::min(order.quantity,resting.quantity);
-                std::cout<<"TRADE: "<<tradeQuantity<<" @ "<<level->first<<" Seller: "<<order.id<<" Buyer: "<<resting.id<<"\n";
+                if(verbose){
+                    std::cout<<"TRADE: "<<tradeQuantity<<" @ "<<level->first<<" Seller: "<<order.id<<" Buyer: "<<resting.id<<"\n";
+                }
                 order.quantity-=tradeQuantity;
                 resting.quantity-=tradeQuantity;
                 if(resting.quantity==0){
