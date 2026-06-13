@@ -3,18 +3,36 @@
 
 int main(){
     OrderBook book;
+    std::string cmd;
 
-    book.addLimitOrder(1, Side::SELL, 5, 100.0); //
-    book.addLimitOrder(2, Side::SELL, 3, 101.0); //
-    book.addLimitOrder(3, Side::SELL, 8, 102.0); //3
+    while(std::cin >> cmd){
+        if(cmd == "LIMIT"){
+            std::string sideStr;
+            int id, qty;
+            double price;
+            std::cin >> sideStr >> id >> price >> qty;
+            Side side = (sideStr == "BUY") ? Side::BUY : Side::SELL;
+            book.addLimitOrder(id, side, qty, price);
+        }
+        else if(cmd == "MARKET"){
+            std::string sideStr;
+            int id, qty;
+            std::cin >> sideStr >> id >> qty;
+            Side side = (sideStr == "BUY") ? Side::BUY : Side::SELL;
+            book.addMarketOrder(id, side, qty);
+        }
+        else if(cmd == "CANCEL"){
+            int id;
+            std::cin >> id;
+            book.cancelOrder(id);
+        }
+        else if(cmd == "PRINT"){
+            book.printBook();
+        }
+        else{
+            std::cout << "Unknown command: " << cmd << "\n";
+        }
+    }
 
-    book.addLimitOrder(4, Side::BUY, 10, 101.0);
-
-    book.addMarketOrder(5, Side::BUY, 5);
-    book.addLimitOrder(6, Side::SELL, 10, 105.0);
-    book.cancelOrder(6);
-    book.addMarketOrder(7, Side::BUY, 5);
-    book.printBook();
-    
     return 0;
 }
